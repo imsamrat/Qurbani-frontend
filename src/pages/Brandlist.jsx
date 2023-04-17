@@ -72,7 +72,7 @@ const Brandlist = () => {
         <>
           <Link
             to={`/admin/brand/${brandState[i]?._id}`}
-            className="fs-3 text-danger"
+            className="fs-3 text-primary"
           >
             <BiEdit />
           </Link>

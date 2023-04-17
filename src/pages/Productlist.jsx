@@ -61,7 +61,7 @@ const columns = [
     width: 150,
   },
   {
-    title: "Action",
+    title: "অ্যাকশন",
     dataIndex: "action",
     width: 120,
   },
@@ -138,7 +138,7 @@ const Productlist = () => {
         <>
           <Link
             to={`/admin/product/${productState[i]._id}`}
-            className=" fs-3 text-danger"
+            className=" fs-3 text-primary"
           >
             <BiEdit />
           </Link>
@@ -156,6 +156,9 @@ const Productlist = () => {
   const setEnquiryStatus = (e, i) => {
     const data = { id: i, statusData: e };
     dispatch(updateStatus(data));
+    setTimeout(() => {
+      dispatch(getProducts(e));
+    }, 1000);
   };
 
   const deleteProd = (e) => {
@@ -174,20 +177,20 @@ const Productlist = () => {
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-primary text-white p-3 rounded-3">
           <div>
             <p className="">টোটাল সদস্য সংখ্যাঃ </p>
-            <h4 className="mb-0">{totalMember} জন</h4>
+            <h4 className="mb-0">{totalMember || 0} জন</h4>
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-info text-white p-3 rounded-3">
           <div>
             <p className="">টোটাল পরিবারের সংখ্যাঃ </p>
-            <h4 className="mb-0">{productState?.length} খানা</h4>
+            <h4 className="mb-0">{productState?.length || 0} খানা</h4>
           </div>
         </div>
         <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-secondary text-white p-3 rounded-3">
           <div>
             <p className="">মাথাপিছু মাংসের পরিমাণঃ </p>
             <h4 className="mb-0">
-              {Math.floor(sumOfMeat / totalMember)} গ্রাম
+              {Math.floor(sumOfMeat / totalMember || 0)} গ্রাম
             </h4>
           </div>
         </div>
@@ -195,7 +198,7 @@ const Productlist = () => {
           <div>
             <p className="">মাথাপিছু হাড্ডির পরিমাণঃ </p>
             <h4 className="mb-0">
-              {Math.floor(sumOfBone / totalMember)} গ্রাম
+              {Math.floor(sumOfBone / totalMember || 0)} গ্রাম
             </h4>
           </div>
         </div>
@@ -203,7 +206,7 @@ const Productlist = () => {
           <div>
             <p className="">মাথাপিছু কলিজার পরিমাণঃ</p>
             <h4 className="mb-0">
-              {Math.floor(sumOfLiver / totalMember)} গ্রাম
+              {Math.floor(sumOfLiver / totalMember || 0)} গ্রাম
             </h4>
           </div>
         </div>

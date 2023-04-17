@@ -18,7 +18,7 @@ let memberSchema = yup.object().shape({
   englishName: yup.string().required("ইংলিশে আপনার নাম লিখুন"),
   banglaName: yup.string().required("বাংলায় আপনার নাম লিখুন"),
   fatherName: yup.string().required("ইংলিশে আপনার বাবার নাম লিখুন"),
-  member: yup.number().required("পরিবারের সদস্য সংখ্যা লিখুন"),
+  member: yup.number().required("পরিবারের সদস্য সংখ্যা লিখুন").moreThan(0, 'পরিবারের সদস্য সংখ্যা শুন্য 0 থেকে বেশি হতে হবে।'),
 });
 
 const Addproduct = () => {

@@ -90,7 +90,7 @@ const MainLayout = () => {
             <div className="position-relative">
               <IoIosNotifications className="fs-4" />
               <span className="badge bg-warning rounded-circle p-1 position-absolute">
-                3
+                0
               </span>
             </div>
 
@@ -99,7 +99,7 @@ const MainLayout = () => {
                 <img
                   width={32}
                   height={32}
-                  src="https://stroyka-admin.html.themeforest.scompiler.ru/variants/ltr/images/customers/customer-4-64x64.jpg"
+                  src="https://img.freepik.com/free-icon/user_318-159711.jpg"
                   alt=""
                 />
               </div>
@@ -109,8 +109,8 @@ const MainLayout = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <h5 className="mb-0">Navdeep</h5>
-                <p className="mb-0">navdeepdahiya753@gmail.com</p>
+                <h5 className="mb-0">Demo</h5>
+                <p className="mb-0">demo@gmail.com</p>
               </div>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
