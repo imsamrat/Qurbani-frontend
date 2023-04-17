@@ -14,6 +14,8 @@ import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
 import calculateSum from "../utils/calculateSum";
 import { getBrands } from "../features/brand/brandSlice";
+import DistributionDetails from "../components/DistributionDetails";
+import MemberDetails from "../components/MemberDetails";
 
 const columns = [
   {
@@ -86,7 +88,6 @@ const Productlist = () => {
   }, []);
   const productState = useSelector((state) => state?.product?.products);
   const brandState = useSelector((state) => state?.brand?.brands);
-
   const totalMember = calculateSum(productState, "member");
   const sumOfMeat = calculateSum(brandState, "meatQuantity");
   const sumOfBone = calculateSum(brandState, "boneQuantity");
@@ -128,7 +129,6 @@ const Productlist = () => {
             }
           >
             <option value="Submitted">পেন্ডিং আছে</option>
-            {/* <option value="Contacted">পেন্ডিং আছে</option> */}
             <option value="In Progress">তথ্য নেই</option>
             <option value="Resolved">সম্পন্ন হয়েছে</option>
           </select>
@@ -173,44 +173,9 @@ const Productlist = () => {
     <div>
       <h3 className="mb-4 title">সদস্যের তালিকা</h3>
       <Link to="/admin/product">সদস্য যোগ করুন</Link>
-      <div className="d-flex justify-content-between align-items-center gap-3">
-        <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-primary text-white p-3 rounded-3">
-          <div>
-            <p className="">টোটাল সদস্য সংখ্যাঃ </p>
-            <h4 className="mb-0">{totalMember || 0} জন</h4>
-          </div>
-        </div>
-        <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-info text-white p-3 rounded-3">
-          <div>
-            <p className="">টোটাল পরিবারের সংখ্যাঃ </p>
-            <h4 className="mb-0">{productState?.length || 0} খানা</h4>
-          </div>
-        </div>
-        <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-secondary text-white p-3 rounded-3">
-          <div>
-            <p className="">মাথাপিছু মাংসের পরিমাণঃ </p>
-            <h4 className="mb-0">
-              {Math.floor(sumOfMeat / totalMember || 0)} গ্রাম
-            </h4>
-          </div>
-        </div>
-        <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-danger text-white p-3 rounded-3">
-          <div>
-            <p className="">মাথাপিছু হাড্ডির পরিমাণঃ </p>
-            <h4 className="mb-0">
-              {Math.floor(sumOfBone / totalMember || 0)} গ্রাম
-            </h4>
-          </div>
-        </div>
-        <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-success text-white p-3 rounded-3">
-          <div>
-            <p className="">মাথাপিছু কলিজার পরিমাণঃ</p>
-            <h4 className="mb-0">
-              {Math.floor(sumOfLiver / totalMember || 0)} গ্রাম
-            </h4>
-          </div>
-        </div>
-      </div>
+      <DistributionDetails />
+      <br />
+      <MemberDetails />
       <br />
       <div>
         <Table columns={columns} dataSource={data1} />
