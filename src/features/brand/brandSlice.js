@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import brandService from "./brandService";
+import { toast } from "react-toastify";
 
 export const getBrands = createAsyncThunk(
   "brand/get-brands",
@@ -105,7 +106,10 @@ export const brandSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.brandName = action.payload.title;
+        state.donorName = action.payload.donorName;
+        state.donorMeatQuantity = action.payload.meatQuantity;
+        state.donorBoneQuantity = action.payload.boneQuantity;
+        state.donorLiverQuantity = action.payload.liverQuantity;
       })
       .addCase(getABrand.rejected, (state, action) => {
         state.isLoading = false;
@@ -136,12 +140,18 @@ export const brandSlice = createSlice({
         state.isError = false;
         state.isSuccess = true;
         state.deletedBrand = action.payload;
+        if(state.isSuccess){
+          toast.success("সদস্য ডিলিট সম্পন্ন হয়েছে!")
+        }
       })
       .addCase(deleteABrand.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
+        if(state.isError){
+          toast.success("কোথাও ভুল হয়েছে!")
+        }
       })
       .addCase(resetState, () => initialState);
   },

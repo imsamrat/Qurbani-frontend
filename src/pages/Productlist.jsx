@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
   resetState,
-  deleteAProduct,
+  deleteAMember,
   updateAMember,
+  updateStatus,
 } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
@@ -57,10 +58,12 @@ const columns = [
   {
     title: "স্ট্যাটাস",
     dataIndex: "status",
+    width: 150,
   },
   {
     title: "Action",
     dataIndex: "action",
+    width: 120,
   },
 ];
 
@@ -83,7 +86,7 @@ const Productlist = () => {
   }, []);
   const productState = useSelector((state) => state?.product?.products);
   const brandState = useSelector((state) => state?.brand?.brands);
-  
+
   const totalMember = calculateSum(productState, "member");
   const sumOfMeat = calculateSum(brandState, "meatQuantity");
   const sumOfBone = calculateSum(brandState, "boneQuantity");
@@ -124,18 +127,21 @@ const Productlist = () => {
               setEnquiryStatus(e.target.value, productState[i]?._id)
             }
           >
-            <option value="Submitted">Submitted</option>
-            <option value="Contacted">Contacted</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
+            <option value="Submitted">পেন্ডিং আছে</option>
+            {/* <option value="Contacted">পেন্ডিং আছে</option> */}
+            <option value="In Progress">তথ্য নেই</option>
+            <option value="Resolved">সম্পন্ন হয়েছে</option>
           </select>
         </>
       ),
       action: (
         <>
-          {/* <Link to={`/admin/product/${productState[i]._id}`} className=" fs-3 text-danger">
+          <Link
+            to={`/admin/product/${productState[i]._id}`}
+            className=" fs-3 text-danger"
+          >
             <BiEdit />
-          </Link> */}
+          </Link>
           <button
             className="ms-3 fs-3 text-danger bg-transparent border-0"
             onClick={() => showModal(productState[i]?._id)}
@@ -148,16 +154,16 @@ const Productlist = () => {
   }
 
   const setEnquiryStatus = (e, i) => {
-    const data = { id: i, memberData: e };
-    dispatch(updateAMember(data));
+    const data = { id: i, statusData: e };
+    dispatch(updateStatus(data));
   };
 
   const deleteProd = (e) => {
-    dispatch(deleteAProduct(e));
+    dispatch(deleteAMember(e));
     setOpen(false);
     setTimeout(() => {
       dispatch(getProducts(e));
-    }, 100);
+    }, 1000);
   };
 
   return (
@@ -212,7 +218,7 @@ const Productlist = () => {
         performAction={() => {
           deleteProd(prodId);
         }}
-        title="Are you sure you want to delete this Product?"
+        title="আপনি কি এই সদস্য ডিলিট করতে চাচ্ছেন?"
       />
     </div>
   );

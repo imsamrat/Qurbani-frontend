@@ -1,6 +1,7 @@
 import axios from "axios";
 import { config } from "../../utils/axiosconfig";
 import { base_url } from "../../utils/baseUrl";
+
 const getBrands = async () => {
   const response = await axios.get(`${base_url}brand/`);
 
@@ -15,10 +16,9 @@ const createBrand = async (brand) => {
 const updateBrand = async (brand) => {
   const response = await axios.put(
     `${base_url}brand/${brand.id}`,
-    { title: brand.brandData.title },
+    { donorName: brand.brandData.donorName,meatQuantity: brand.brandData.meatQuantity,boneQuantity: brand.brandData.boneQuantity,liverQuantity: brand.brandData.liverQuantity },
     config
   );
-
   return response.data;
 };
 const getBrand = async (id) => {

@@ -13,7 +13,7 @@ import {
 } from "../features/brand/brandSlice";
 
 let schema = yup.object().shape({
-  donerName: yup.string().required("ইংলিশে আপনার নাম লিখুন"),
+  donorName: yup.string().required("ইংলিশে আপনার নাম লিখুন"),
   meatQuantity: yup.number().required("মাংসের পরিমাণ (গ্রাম)"),
   boneQuantity: yup.number().required("হাড্ডির পরিমাণ (গ্রাম)"),
   liverQuantity: yup.number().required("কলিজার পরিমাণ (গ্রাম)"),
@@ -23,13 +23,16 @@ const Addbrand = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const getBrandId = location.pathname.split("/")[3];
-  const newBrand = useSelector((state) => state.brand);
+  const newBrand = useSelector((state) => state?.brand);
   const {
     isSuccess,
     isError,
     isLoading,
     createdBrand,
-    brandName,
+    donorName,
+    donorMeatQuantity,
+    donorBoneQuantity,
+    donorLiverQuantity,
     updatedBrand,
   } = newBrand;
   useEffect(() => {
@@ -42,24 +45,24 @@ const Addbrand = () => {
 
   useEffect(() => {
     if (isSuccess && createdBrand) {
-      toast.success("Brand Added Successfully!");
+      toast.success("ডোনার সফলভাবে এড হয়েছে");
     }
     if (isSuccess && updatedBrand) {
-      toast.success("Brand Updated Successfully!");
+      toast.success("ডোনার সফলভাবে আপডেট হয়েছে");
       navigate("/admin/list-brand");
     }
 
     if (isError) {
-      toast.error("Something Went Wrong!");
+      toast.error("কোথাও ভুল হয়েছে!");
     }
   }, [isSuccess, isError, isLoading]);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      donerName: brandName || "",
-      meatQuantity: brandName || "",
-      boneQuantity: brandName || "",
-      liverQuantity: brandName || "",
+      donorName: donorName || "",
+      meatQuantity: donorMeatQuantity || "",
+      boneQuantity: donorBoneQuantity || "",
+      liverQuantity: donorLiverQuantity || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -80,21 +83,21 @@ const Addbrand = () => {
   return (
     <div>
       <h3 className="mb-4 title">
-        {getBrandId !== undefined ? "Edit" : "Add"} Brand
+      ডোনার {getBrandId !== undefined ? "ইডিট" : "এড"} করুন 
       </h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
-            name="donerName"
-            onChng={formik.handleChange("donerName")}
-            onBlr={formik.handleBlur("donerName")}
-            val={formik.values.donerName}
+            name="donorName"
+            onChng={formik.handleChange("donorName")}
+            onBlr={formik.handleBlur("donorName")}
+            val={formik.values.donorName}
             label="দাতার নাম"
             id="brand"
           />
           <div className="error">
-            {formik.touched.donerName && formik.errors.donerName}
+            {formik.touched.donorName && formik.errors.donorName}
           </div>
           <CustomInput
             type="number"
@@ -133,7 +136,7 @@ const Addbrand = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            {getBrandId !== undefined ? "Edit" : "Add"} Brand
+           ডোনার {getBrandId !== undefined ? "ইডিট" : "যোগ"} করুন
           </button>
         </form>
       </div>

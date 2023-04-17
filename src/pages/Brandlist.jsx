@@ -19,8 +19,8 @@ const columns = [
   },
   {
     title: "ডোনারের নাম",
-    dataIndex: "donerName",
-    sorter: (a, b) => a.donerName.length - b.donerName.length,
+    dataIndex: "donorName",
+    sorter: (a, b) => a.donorName.length - b.donorName.length,
   },
   {
     title: "মাংসের পরিমাণ",
@@ -64,7 +64,7 @@ const Brandlist = () => {
   for (let i = 0; i < brandState?.length; i++) {
     data1.push({
       key: i + 1,
-      donerName: brandState[i]?.donerName,
+      donorName: brandState[i]?.donorName,
       meatQuantity: brandState[i]?.meatQuantity,
       boneQuantity: brandState[i]?.boneQuantity,
       liverQuantity: brandState[i]?.liverQuantity,
@@ -101,7 +101,7 @@ const Brandlist = () => {
   return (
     <div>
       <h3 className="mb-4 title">ডোনারের তালিকা</h3>
-      <Link to="/admin/brand">সদস্য যোগ করুন</Link>
+      <Link to="/admin/brand">ডোনার যোগ করুন</Link>
       <div className="d-flex justify-content-between align-items-center gap-3">
       <div className="d-flex justify-content-between align-items-end flex-grow-1 bg-primary text-white p-3 rounded-3">
           <div>
@@ -138,7 +138,7 @@ const Brandlist = () => {
         performAction={() => {
           deleteBrand(brandId);
         }}
-        title="Are you sure you want to delete this brand?"
+        title="আপনি কি এই ডোনার ডিলিট করতে চাচ্ছেন?"
       />
     </div>
   );

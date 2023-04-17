@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {
-  AiOutlineDashboard,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-  AiOutlineBgColors,
+  AiOutlineIdcard
 } from "react-icons/ai";
 import { RiCouponLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
@@ -15,7 +12,8 @@ import { ImBlog } from "react-icons/im";
 import { IoIosNotifications } from "react-icons/io";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { SiBrandfolder } from "react-icons/si";
-import { BiCategoryAlt } from "react-icons/bi";
+import { MdDashboard } from "react-icons/md";
+import { BsPeopleFill } from "react-icons/bs";
 import { Layout, Menu, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
@@ -47,7 +45,7 @@ const MainLayout = () => {
           items={[
             {
               key: "",
-              icon: <AiOutlineDashboard className="fs-4" />,
+              icon: <MdDashboard className="fs-4" />,
               label: "ড্যাশবোর্ড",
             },
             // {
@@ -57,7 +55,7 @@ const MainLayout = () => {
             // },
             {
               key: "list-product",
-              icon: <AiOutlineShoppingCart className="fs-4" />,
+              icon: <BsPeopleFill className="fs-4" />,
               label: "সদস্যের লিস্ট",
             },
             // {
@@ -67,7 +65,7 @@ const MainLayout = () => {
             // },
             {
               key: "list-brand",
-              icon: <SiBrandfolder className="fs-4" />,
+              icon: <AiOutlineIdcard className="fs-4" />,
               label: "ডোনারের লিস্ট",
             },
           ]}
